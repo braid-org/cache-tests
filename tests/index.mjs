@@ -1,3 +1,4 @@
+import braid from './braid.mjs'
 import ccParse from './cc-parse.mjs'
 import ccRequest from './cc-request.mjs'
 import ccResponse from './cc-response.mjs'
@@ -23,4 +24,4 @@ import auth from './authorization.mjs'
 import other from './other.mjs'
 import cdncc from './cdn-cache-control.mjs'
 
-export default [ccFreshness, ccParse, ageParse, expires, expiresParse, ccResponse, stale, heuristic, methods, statuses, ccRequest, pragma, vary, varyParse, conditionalLm, conditionalEtag, headers, update304, updateHead, invalidation, partial, auth, other, cdncc]
+export default [braid, ccFreshness] // , ccParse, ageParse, expires, expiresParse, ccResponse, stale, heuristic, methods, statuses, ccRequest, pragma, vary, varyParse, conditionalLm, conditionalEtag, headers, update304, updateHead, invalidation, partial, auth, other, cdncc]
