@@ -1,53 +1,47 @@
 {
-  "braid-1": true,
-  "braid-10": [
+  "braid-avoid-different-version": [
+    "Assertion",
+    "Response 2 comes from cache"
+  ],
+  "braid-avoid-no-version": [
+    "Assertion",
+    "Response 2 comes from cache"
+  ],
+  "braid-cache-miss-different": [
+    "Assertion",
+    "Response 2 comes from cache"
+  ],
+  "braid-cache-multiple-hit-first": [
     "Assertion",
     "Response 2 header Version is \"\"test-1\"\", not \"\"test-2\"\""
   ],
-  "braid-11": [
+  "braid-old-then-another-hit": [
     "Assertion",
     "Response 1 header Version is \"null\", not \"\"test-0\"\""
   ],
-  "braid-12": [
+  "braid-old-then-current-hit": [
     "Assertion",
     "Response 1 header Version is \"null\", not \"\"test-0\"\""
   ],
-  "braid-13": [
+  "braid-old-then-subscribe-hit": [
     "Assertion",
     "Response 1 header Version is \"null\", not \"\"test-0\"\""
   ],
-  "braid-14": [
+  "braid-parents-header-passthrough": true,
+  "braid-put-then-get-hit": [
     "Assertion",
     "Response 1 header Version is \"null\", not \"\"test-2\"\""
   ],
-  "braid-15": [
-    "Assertion",
-    "Response 1 header Version is \"null\", not \"\"test-2\"\""
-  ],
-  "braid-16": [
-    "Assertion",
-    "Response 1 header Version is \"null\", not \"\"test-0\"\""
-  ],
-  "braid-2": true,
-  "braid-3": true,
-  "braid-4": [
-    "Assertion",
-    "Response 2 comes from cache"
-  ],
-  "braid-5": [
-    "Assertion",
-    "Response 2 comes from cache"
-  ],
-  "braid-6": true,
-  "braid-7": true,
-  "braid-8": [
-    "Assertion",
-    "Response 2 comes from cache"
-  ],
-  "braid-9": [
+  "braid-put-version-cached": [
     "Assertion",
     "Response 2 does not come from cache"
   ],
+  "braid-reuse-matching-version": true,
+  "braid-reuse-no-version": true,
+  "braid-reuse-same-version": true,
+  "braid-store-parents": true,
+  "braid-store-version": true,
+  "braid-version-header-passthrough": true,
   "freshness-max-age": true,
   "freshness-max-age-0": true,
   "freshness-max-age-0-expires": true,

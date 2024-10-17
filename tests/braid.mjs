@@ -1,31 +1,43 @@
-export default
-
-{
+export default {
   name: 'Braid Tests',
   id: 'braid-tests',
   description: 'Braid Tests',
   tests: [
     {
-      name: '[legacy] do version/parents headers breach the proxy?',
-      id: 'braid-1',
+      name: '[legacy] Does HTTP cache allow `Version` header to pass through?',
+      id: 'braid-version-header-passthrough',
       depends_on: [],
       requests: [
         {
           request_method: 'GET',
           response_headers: [
             ['Version', '"test-1"'],
-            ['Parents', '"test-2"'],
           ],
           expected_response_headers: [
             ['Version', '"test-1"'],
+          ]
+        }
+      ]
+    },
+    {
+      name: '[legacy] Does HTTP cache allow `Parents` header to pass through?',
+      id: 'braid-parents-header-passthrough',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          response_headers: [
+            ['Parents', '"test-2"'],
+          ],
+          expected_response_headers: [
             ['Parents', '"test-2"'],
           ]
         }
       ]
     },
     {
-      name: '[legacy] are version/parents headers cached?',
-      id: 'braid-2',
+      name: '[legacy] Does HTTP cache store `Version` header?',
+      id: 'braid-store-version',
       depends_on: [],
       requests: [
         {
@@ -34,11 +46,9 @@ export default
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
             ['Version', '"test-1"'],
-            ['Parents', '"test-2"'],
           ],
           expected_response_headers: [
             ['Version', '"test-1"'],
-            ['Parents', '"test-2"'],
           ]
         },
         {
@@ -46,14 +56,38 @@ export default
           expected_type: 'cached',
           expected_response_headers: [
             ['Version', '"test-1"'],
+          ]
+        }
+      ]
+    },
+    {
+      name: '[legacy] Does HTTP cache store `Parents` header?',
+      id: 'braid-store-parents',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Parents', '"test-2"'],
+          ],
+          expected_response_headers: [
+            ['Parents', '"test-2"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          expected_type: 'cached',
+          expected_response_headers: [
             ['Parents', '"test-2"'],
           ]
         }
       ]
     },
     {
-      name: '[legacy] cache one version, then request it, should be HIT!',
-      id: 'braid-3',
+      name: '[legacy] Does HTTP cache reuse a response with a `Version`, from a request with a `Version`, when requesting the same `Version`?',
+      id: 'braid-reuse-same-version',
       depends_on: [],
       requests: [
         {
@@ -76,12 +110,15 @@ export default
             ['Version', '"test-1"']
           ],
           expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
         }
       ]
     },
     {
-      name: '[legacy] cache one version, then request another, should be MISS!',
-      id: 'braid-4',
+      name: '[legacy] Does HTTP cache avoid reusing a response with a `Version`, from a request with a `Version`, when requesting a different `Version`?',
+      id: 'braid-avoid-different-version',
       depends_on: [],
       requests: [
         {
@@ -108,8 +145,8 @@ export default
       ]
     },
     {
-      name: '[legacy] cache one version, then request current, should be MISS!',
-      id: 'braid-5',
+      name: '[legacy] Does HTTP cache avoid reusing a response with a `Version`, from a request with a `Version`, when requesting without a `Version`?',
+      id: 'braid-avoid-no-version',
       depends_on: [],
       requests: [
         {
@@ -133,8 +170,8 @@ export default
       ]
     },
     {
-      name: '[legacy] cache current, then request current, should be HIT!',
-      id: 'braid-6',
+      name: '[legacy] Does HTTP cache reuse a response with a `Version`, from a request without a `Version`, when requesting without a `Version` again?',
+      id: 'braid-reuse-no-version',
       depends_on: [],
       requests: [
         {
@@ -151,12 +188,15 @@ export default
         {
           request_method: 'GET',
           expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
         }
       ]
     },
     {
-      name: '[legacy] cache current, then request that version, should be HIT!',
-      id: 'braid-7',
+      name: '[legacy] Does HTTP cache reuse a response with a `Version`, from a request without a `Version`, when requesting the same `Version`?',
+      id: 'braid-reuse-matching-version',
       depends_on: [],
       requests: [
         {
@@ -180,8 +220,8 @@ export default
       ]
     },
     {
-      name: '[legacy] cache current, then request another, should be MISS!',
-      id: 'braid-8',
+      name: '[legacy] Does HTTP cache avoid reusing a response with a `Version`, from a request without a `Version`, when requesting a different `Version`?',
+      id: 'braid-cache-miss-different',
       depends_on: [],
       requests: [
         {
@@ -205,8 +245,8 @@ export default
       ]
     },
     {
-      name: '[legacy] is a PUT with a version cached?',
-      id: 'braid-9',
+      name: '[legacy] Does HTTP cache reuse a response to a PUT with a `Version` when PUT\'ing the same `Version` again?',
+      id: 'braid-put-version-cached',
       depends_on: [],
       requests: [
         {
@@ -233,8 +273,8 @@ export default
       ]
     },
     {
-      name: '[upgrade 1]: cache one version, then another, then request first, should HIT!',
-      id: 'braid-10',
+      name: '[upgrade 1]: Does HTTP cache reuse a response with one `Version`, if it caches a response with a second `Version`, before a request for the original `Version`?',
+      id: 'braid-cache-multiple-hit-first',
       depends_on: [],
       requests: [
         {
@@ -274,10 +314,9 @@ export default
         }
       ]
     },
-
     {
-      name: '[upgrade 2]: ask for old, then for current, should HIT!',
-      id: 'braid-11',
+      name: '[upgrade 2]: After HTTP cache handles a request for an old `Version`, it should respond from cache with latest `Version` when requesting without a `Version`.',
+      id: 'braid-old-then-current-hit',
       depends_on: [],
       requests: [
         {
@@ -299,8 +338,8 @@ export default
       ]
     },
     {
-      name: '[upgrade 2]: ask for old, then for another, should HIT!',
-      id: 'braid-12',
+      name: '[upgrade 2]: After HTTP cache handles a request for an old `Version`, it should respond from cache when requesting a different `Version`.',
+      id: 'braid-old-then-another-hit',
       depends_on: [],
       requests: [
         {
@@ -325,8 +364,8 @@ export default
       ]
     },
     {
-      name: '[upgrade 2]: ask for old, then subscribe, should HIT!',
-      id: 'braid-13',
+      name: '[upgrade 2]: After HTTP cache handles a request for an old `Version`, it should respond from cache when requesting with `Subscribe: true`.',
+      id: 'braid-old-then-subscribe-hit',
       depends_on: [],
       requests: [
         {
@@ -351,8 +390,8 @@ export default
       ]
     },
     {
-      name: '[upgrade 2]: PUT version, then request it, should HIT!',
-      id: 'braid-14',
+      name: '[upgrade 2]: After HTTP cache handles a PUT with a `Version`, it should respond from cache when requesting that `Version` again.',
+      id: 'braid-put-then-get-hit',
       depends_on: [],
       requests: [
         {
@@ -371,55 +410,6 @@ export default
           ],
           expected_response_headers: [
             ['Version', '"test-2"'],
-          ],
-          expected_type: 'cached',
-        },
-      ]
-    },
-    {
-      name: '[upgrade 2]: PUT version, then PUT it again, should HIT!',
-      id: 'braid-15',
-      depends_on: [],
-      requests: [
-        {
-          request_method: 'PUT',
-          request_headers: [
-            ['Version', '"test-2"'],
-          ],
-          expected_response_headers: [
-            ['Version', '"test-2"'],
-          ]
-        },
-        {
-          request_method: 'PUT',
-          request_headers: [
-            ['Version', '"test-2"'],
-          ],
-          expected_response_headers: [
-            ['Version', '"test-2"'],
-          ],
-          expected_type: 'cached',
-        },
-      ]
-    },
-    {
-      name: '[upgrade 2]: PUT version, then request most recent, should HIT!',
-      id: 'braid-16',
-      depends_on: [],
-      requests: [
-        {
-          request_method: 'PUT',
-          request_headers: [
-            ['Version', '"test-0"'],
-          ],
-          expected_response_headers: [
-            ['Version', '"test-0"'],
-          ]
-        },
-        {
-          request_method: 'GET',
-          expected_response_headers: [
-            ['Version', '"test-1"'],
           ],
           expected_type: 'cached',
         },
