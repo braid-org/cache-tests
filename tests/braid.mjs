@@ -245,6 +245,171 @@ export default {
       ]
     },
     {
+      name: '[legacy w/Vary] Does HTTP cache reuse a response with a `Version` and `Vary: Version`, from a request with a `Version`, when requesting the same `Version`?',
+      id: 'braid-reuse-same-version-with-vary',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version'],
+            ['Version', '"test-1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        }
+      ]
+    },
+    {
+      name: '[legacy w/Vary] Does HTTP cache avoid reusing a response with a `Version` and `Vary: Version`, from a request with a `Version`, when requesting a different `Version`?',
+      id: 'braid-avoid-different-version-with-vary',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version'],
+            ['Version', '"test-1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-2"']
+          ],
+          expected_type: 'not_cached',
+        }
+      ]
+    },
+    {
+      name: '[legacy w/Vary] Does HTTP cache avoid reusing a response with a `Version` and `Vary: Version`, from a request with a `Version`, when requesting without a `Version`?',
+      id: 'braid-avoid-no-version-with-vary',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version'],
+            ['Version', '"test-1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          expected_type: 'not_cached',
+        }
+      ]
+    },
+    {
+      name: '[legacy w/Vary] Does HTTP cache reuse a response with a `Version` and `Vary: Version`, from a request without a `Version`, when requesting without a `Version` again?',
+      id: 'braid-reuse-no-version-with-vary',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version'],
+            ['Version', '"test-1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        }
+      ]
+    },
+    {
+      name: '[legacy w/Vary] Does HTTP cache reuse a response with a `Version` and `Vary: Version`, from a request without a `Version`, when requesting the same `Version`?',
+      id: 'braid-reuse-matching-version-with-vary',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version'],
+            ['Version', '"test-1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          expected_type: 'cached',
+        }
+      ]
+    },
+    {
+      name: '[legacy w/Vary] Does HTTP cache avoid reusing a response with a `Version` and `Vary: Version`, from a request without a `Version`, when requesting a different `Version`?',
+      id: 'braid-cache-miss-different-with-vary',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version'],
+            ['Version', '"test-1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-2"']
+          ],
+          expected_type: 'not_cached',
+        }
+      ]
+    },    
+    {
       name: '[legacy] Does HTTP cache reuse a response to a PUT with a `Version` when PUT\'ing the same `Version` again?',
       id: 'braid-put-version-cached',
       depends_on: [],
