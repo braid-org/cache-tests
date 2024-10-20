@@ -438,6 +438,34 @@ export default {
       ]
     },
     {
+      name: '[legacy] Does HTTP cache reuse a PUT request with a `Version` when GET\'ing the same `Version` again?',
+      id: 'braid-put-then-get',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'PUT',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Version', '"test-1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          expected_type: 'cached',
+        }
+      ]
+    },
+    {
       name: '[upgrade 1]: Does HTTP cache reuse a response with one `Version`, if it caches a response with a second `Version`, before a request for the original `Version`?',
       id: 'braid-cache-multiple-hit-first',
       depends_on: [],
@@ -466,6 +494,7 @@ export default {
             ['Date', 0],
             ['Version', '"test-2"'],
           ],
+          expected_type: 'not_cached',
           expected_response_headers: [
             ['Version', '"test-2"'],
           ],
@@ -476,6 +505,151 @@ export default {
             ['Version', '"test-1"']
           ],
           expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ],
+        }
+      ]
+    },
+    {
+      name: '[upgrade 1]: Does HTTP cache reuse a PUT request with one `Version`, if it caches a PUT request with a second `Version`, before a request for the original `Version`?',
+      id: 'braid-put-multiple-hit-first',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'PUT',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Version', '"test-1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'PUT',
+          request_headers: [
+            ['Version', '"test-2"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Version', '"test-2"'],
+          ],
+          expected_type: 'not_cached',
+          expected_response_headers: [
+            ['Version', '"test-2"'],
+          ],
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ],
+        }
+      ]
+    },
+    {
+      name: '[upgrade 1 w/Vary]: Does HTTP cache reuse a response with one `Version` (and `Vary: Version`), if it caches a response with a second `Version` (also with `Vary`), before a request for the original `Version`?',
+      id: 'braid-cache-multiple-hit-first-with-vary',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version'],
+            ['Version', '"test-1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-2"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version'],
+            ['Version', '"test-2"'],
+          ],
+          expected_type: 'not_cached',
+          expected_response_headers: [
+            ['Version', '"test-2"'],
+          ],
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ],
+        }
+      ]
+    },
+    {
+      name: '[upgrade 1 w/Vary]: Does HTTP cache reuse a PUT request with one `Version` (and `Vary: Version` in the response), if it caches a PUT request with a second `Version` (also with `Vary: Version` in the resonse), before a request for the original `Version`?',
+      id: 'braid-put-multiple-hit-first-with-vary',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'PUT',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version'],
+            ['Version', '"test-1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'PUT',
+          request_headers: [
+            ['Version', '"test-2"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version'],
+            ['Version', '"test-2"'],
+          ],
+          expected_type: 'not_cached',
+          expected_response_headers: [
+            ['Version', '"test-2"'],
+          ],
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ],
         }
       ]
     },
