@@ -24,4 +24,4 @@ import auth from './authorization.mjs'
 import other from './other.mjs'
 import cdncc from './cdn-cache-control.mjs'
 
-export default [braid, ccFreshness] // , ccParse, ageParse, expires, expiresParse, ccResponse, stale, heuristic, methods, statuses, ccRequest, pragma, vary, varyParse, conditionalLm, conditionalEtag, headers, update304, updateHead, invalidation, partial, auth, other, cdncc]
+export default [...braid] // , ccFreshness, ccParse, ageParse, expires, expiresParse, ccResponse, stale, heuristic, methods, statuses, ccRequest, pragma, vary, varyParse, conditionalLm, conditionalEtag, headers, update304, updateHead, invalidation, partial, auth, other, cdncc]
