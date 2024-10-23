@@ -1,7 +1,7 @@
 # Tests for HTTP Caches
 
 This is a test suite for the behaviours of [HTTP caches](https://httpwg.org/specs/rfc9111.html),
-including browsers, proxy caches and CDNs. Its public results are available at
+including browsers, proxy caches and CDNs, against the [Braid-HTTP specs](https://github.com/braid-org/braid-spec). Its public results are available at
 [cache-tests.braid.org](https://cache-tests.braid.org).
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
