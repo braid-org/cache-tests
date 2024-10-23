@@ -1,7 +1,7 @@
 export default [{
   id: 'braid-tests',
   name: 'Legacy (Versioning-Unaware) Caches',
-  description: 'Tests for legacy caches, without a `Vary` header specified',
+  description: 'Legacy caches can confuse/clobber versions',
   tests: [
     {
       name: 'Does HTTP cache allow `Version` header to pass through?',
@@ -14,7 +14,7 @@ export default [{
             ['Version', '"test-1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"test-2"'],
           ]
         }
       ]
@@ -305,7 +305,7 @@ export default [{
 }, {
   id: 'braid-tests-legacy-with-vary',
   name: 'Caches when presented with `Vary: Version, Parents`',
-  description: 'In these tests, the server responds with `Vary: Version, Parents` to guide legacy caches to the correct behavior',
+  description: 'If server responds with `Vary: Version, Parents`, legacy caches are able to distinguish versions correctly',
   tests: [
     {
       name: 'Does HTTP cache allow `Version` header to pass through?',
@@ -316,7 +316,7 @@ export default [{
           request_method: 'GET',
           response_headers: [
             ['Version', '"test-1"'],
-            ['Vary', 'Version, Parents'],
+            ['Vary', 'Version,Parents'],
           ],
           expected_response_headers: [
             ['Version', '"test-1"'],
@@ -333,7 +333,7 @@ export default [{
           request_method: 'GET',
           response_headers: [
             ['Parents', '"test-2"'],
-            ['Vary', 'Version, Parents'],
+            ['Vary', 'Version,Parents'],
           ],
           expected_response_headers: [
             ['Parents', '"test-2"'],
@@ -352,7 +352,7 @@ export default [{
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
             ['Version', '"test-1"'],
-            ['Vary', 'Version, Parents'],
+            ['Vary', 'Version,Parents'],
           ],
           expected_response_headers: [
             ['Version', '"test-1"'],
@@ -378,7 +378,7 @@ export default [{
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
             ['Parents', '"test-2"'],
-            ['Vary', 'Version, Parents'],
+            ['Vary', 'Version,Parents'],
           ],
           expected_response_headers: [
             ['Parents', '"test-2"'],
@@ -406,7 +406,7 @@ export default [{
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Vary', 'Version, Parents'],
+            ['Vary', 'Version,Parents'],
             ['Version', '"test-1"'],
           ],
           expected_response_headers: [
@@ -438,7 +438,7 @@ export default [{
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Vary', 'Version, Parents'],
+            ['Vary', 'Version,Parents'],
             ['Version', '"test-1"'],
           ],
           expected_response_headers: [
@@ -467,7 +467,7 @@ export default [{
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Vary', 'Version, Parents'],
+            ['Vary', 'Version,Parents'],
             ['Version', '"test-1"'],
           ],
           expected_response_headers: [
@@ -490,7 +490,7 @@ export default [{
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Vary', 'Version, Parents'],
+            ['Vary', 'Version,Parents'],
             ['Version', '"test-1"'],
           ],
           expected_response_headers: [

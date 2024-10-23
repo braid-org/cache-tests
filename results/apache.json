@@ -3,50 +3,29 @@
     "Assertion",
     "Response 2 comes from cache"
   ],
-  "braid-avoid-different-version-with-vary": [
-    "Setup",
-    "Response 1 header Vary is \"Version,Parents\", not \"Version, Parents\""
-  ],
+  "braid-avoid-different-version-with-vary": true,
   "braid-avoid-no-version": [
     "Assertion",
     "Response 2 comes from cache"
   ],
-  "braid-avoid-no-version-with-vary": [
-    "Setup",
-    "Response 1 header Vary is \"Version,Parents\", not \"Version, Parents\""
-  ],
+  "braid-avoid-no-version-with-vary": true,
   "braid-parents-header-passthrough": true,
-  "braid-parents-header-passthrough-with-vary": [
-    "Setup",
-    "Response 1 header Vary is \"Version,Parents\", not \"Version, Parents\""
-  ],
+  "braid-parents-header-passthrough-with-vary": true,
   "braid-reuse-matching-version-with-vary": [
     "Assertion",
     "Response 2 does not come from cache"
   ],
   "braid-reuse-no-version": true,
-  "braid-reuse-no-version-with-vary": [
-    "Setup",
-    "Response 1 header Vary is \"Version,Parents\", not \"Version, Parents\""
-  ],
+  "braid-reuse-no-version-with-vary": true,
   "braid-reuse-same-version": true,
-  "braid-reuse-same-version-with-vary": [
-    "Setup",
-    "Response 1 header Vary is \"Version,Parents\", not \"Version, Parents\""
-  ],
+  "braid-reuse-same-version-with-vary": true,
   "braid-store-parents": true,
-  "braid-store-parents-with-vary": [
-    "Setup",
-    "Response 1 header Vary is \"Version,Parents\", not \"Version, Parents\""
-  ],
+  "braid-store-parents-with-vary": true,
   "braid-store-version": true,
-  "braid-store-version-with-vary": [
-    "Setup",
-    "Response 1 header Vary is \"Version,Parents\", not \"Version, Parents\""
+  "braid-store-version-with-vary": true,
+  "braid-version-header-passthrough": [
+    "Assertion",
+    "Response 1 header Version is \"\"test-1\"\", not \"\"test-2\"\""
   ],
-  "braid-version-header-passthrough": true,
-  "braid-version-header-passthrough-with-vary": [
-    "Setup",
-    "Response 1 header Vary is \"Version,Parents\", not \"Version, Parents\""
-  ]
+  "braid-version-header-passthrough-with-vary": true
 }
