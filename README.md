@@ -2,7 +2,7 @@
 
 This is a test suite for the behaviours of [HTTP caches](https://httpwg.org/specs/rfc9111.html),
 including browsers, proxy caches and CDNs. Its public results are available at
-[cache-tests.fyi](https://cache-tests.fyi).
+[cache-tests.braid.org](https://cache-tests.braid.org).
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
