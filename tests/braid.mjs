@@ -1,7 +1,7 @@
 export default [{
   id: 'braid-tests',
   name: 'Legacy (Versioning-Unaware) Caches',
-  description: 'Legacy (Versioning-Unaware) Caches',
+  description: 'Legacy caches can confuse/clobber versions',
   tests: [
     {
       name: 'Does HTTP cache allow `Version` header to pass through?',
@@ -304,8 +304,8 @@ export default [{
   ]
 }, {
   id: 'braid-tests-legacy-with-vary',
-  name: 'Legacy Caches when presented with `Vary: Version, Parents`',
-  description: 'Server responds with `Vary: Version, Parents`',
+  name: 'Caches when presented with `Vary: Version, Parents`',
+  description: 'If the server responds with `Vary: Version, Parents`, caches are able to distinguish versions',
   tests: [
     {
       name: 'Does HTTP cache allow `Version` header to pass through?',
