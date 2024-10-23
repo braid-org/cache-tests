@@ -305,7 +305,7 @@ export default [{
 }, {
   id: 'braid-tests-legacy-with-vary',
   name: 'Caches when presented with `Vary: Version, Parents`',
-  description: 'If the server responds with `Vary: Version, Parents`, caches are able to distinguish versions',
+  description: 'If server responds with `Vary: Version, Parents`, legacy caches are able to distinguish versions correctly',
   tests: [
     {
       name: 'Does HTTP cache allow `Version` header to pass through?',
