@@ -9,50 +9,8 @@
     "Response 2 comes from cache"
   ],
   "braid-avoid-no-version-with-vary": true,
-  "braid-cache-miss-different": [
-    "Assertion",
-    "Response 2 comes from cache"
-  ],
-  "braid-cache-miss-different-with-vary": true,
-  "braid-cache-multiple-hit-first": [
-    "Assertion",
-    "Response 2 comes from cache"
-  ],
-  "braid-cache-multiple-hit-first-with-vary": true,
-  "braid-old-then-another-hit": [
-    "Assertion",
-    "Response 1 header Version is \"null\", not \"\"test-0\"\""
-  ],
-  "braid-old-then-current-hit": [
-    "Assertion",
-    "Response 1 header Version is \"null\", not \"\"test-0\"\""
-  ],
-  "braid-old-then-subscribe-hit": [
-    "Assertion",
-    "Response 1 header Version is \"null\", not \"\"test-0\"\""
-  ],
   "braid-parents-header-passthrough": true,
-  "braid-put-multiple-hit-first": [
-    "Assertion",
-    "Response 3 does not come from cache"
-  ],
-  "braid-put-multiple-hit-first-with-vary": [
-    "Assertion",
-    "Response 3 does not come from cache"
-  ],
-  "braid-put-then-get": [
-    "Assertion",
-    "Response 2 does not come from cache"
-  ],
-  "braid-put-then-get-hit": [
-    "Assertion",
-    "Response 1 header Version is \"null\", not \"\"test-2\"\""
-  ],
-  "braid-put-version-cached": [
-    "Assertion",
-    "Response 2 does not come from cache"
-  ],
-  "braid-reuse-matching-version": true,
+  "braid-parents-header-passthrough-with-vary": true,
   "braid-reuse-matching-version-with-vary": [
     "Assertion",
     "Response 2 does not come from cache"
@@ -62,34 +20,9 @@
   "braid-reuse-same-version": true,
   "braid-reuse-same-version-with-vary": true,
   "braid-store-parents": true,
+  "braid-store-parents-with-vary": true,
   "braid-store-version": true,
+  "braid-store-version-with-vary": true,
   "braid-version-header-passthrough": true,
-  "freshness-max-age": true,
-  "freshness-max-age-0": true,
-  "freshness-max-age-0-expires": true,
-  "freshness-max-age-age": true,
-  "freshness-max-age-case-insenstive": true,
-  "freshness-max-age-date": true,
-  "freshness-max-age-expires": true,
-  "freshness-max-age-expires-invalid": true,
-  "freshness-max-age-extension": true,
-  "freshness-max-age-max": [
-    "Assertion",
-    "Response 2 does not come from cache"
-  ],
-  "freshness-max-age-max-minus-1": true,
-  "freshness-max-age-max-plus": true,
-  "freshness-max-age-max-plus-1": [
-    "Assertion",
-    "Response 2 does not come from cache"
-  ],
-  "freshness-max-age-negative": true,
-  "freshness-max-age-s-maxage-shared-longer": true,
-  "freshness-max-age-s-maxage-shared-longer-multiple": true,
-  "freshness-max-age-s-maxage-shared-longer-reversed": true,
-  "freshness-max-age-s-maxage-shared-shorter": true,
-  "freshness-max-age-s-maxage-shared-shorter-expires": true,
-  "freshness-max-age-stale": true,
-  "freshness-none": true,
-  "freshness-s-maxage-shared": true
+  "braid-version-header-passthrough-with-vary": true
 }
