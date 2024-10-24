@@ -23,9 +23,6 @@
   "braid-store-parents-with-vary": true,
   "braid-store-version": true,
   "braid-store-version-with-vary": true,
-  "braid-version-header-passthrough": [
-    "Assertion",
-    "Response 1 header Version is \"\"test-1\"\", not \"\"test-2\"\""
-  ],
+  "braid-version-header-passthrough": true,
   "braid-version-header-passthrough-with-vary": true
 }

@@ -11,10 +11,10 @@ export default [{
         {
           request_method: 'GET',
           response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-2"'],
+            ['Version', '"1"'],
           ]
         }
       ]
@@ -27,10 +27,10 @@ export default [{
         {
           request_method: 'GET',
           response_headers: [
-            ['Parents', '"test-2"'],
+            ['Parents', '"2"'],
           ],
           expected_response_headers: [
-            ['Parents', '"test-2"'],
+            ['Parents', '"2"'],
           ]
         }
       ]
@@ -45,17 +45,17 @@ export default [{
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         },
         {
           request_method: 'GET',
           expected_type: 'cached',
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         }
       ]
@@ -70,17 +70,17 @@ export default [{
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Parents', '"test-2"'],
+            ['Parents', '"2"'],
           ],
           expected_response_headers: [
-            ['Parents', '"test-2"'],
+            ['Parents', '"2"'],
           ]
         },
         {
           request_method: 'GET',
           expected_type: 'cached',
           expected_response_headers: [
-            ['Parents', '"test-2"'],
+            ['Parents', '"2"'],
           ]
         }
       ]
@@ -93,25 +93,25 @@ export default [{
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"test-1"']
+            ['Version', '"1"']
           ],
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         },
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"test-1"']
+            ['Version', '"1"']
           ],
           expected_type: 'cached',
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         }
       ]
@@ -124,21 +124,21 @@ export default [{
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"test-1"']
+            ['Version', '"1"']
           ],
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         },
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"test-2"']
+            ['Version', '"2"']
           ],
           expected_type: 'not_cached',
         }
@@ -152,15 +152,15 @@ export default [{
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"test-1"']
+            ['Version', '"1"']
           ],
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         },
         {
@@ -179,17 +179,17 @@ export default [{
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         },
         {
           request_method: 'GET',
           expected_type: 'cached',
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         }
       ]
@@ -205,16 +205,16 @@ export default [{
     //       response_headers: [
     //         ['Cache-Control', 'max-age=100000'],
     //         ['Date', 0],
-    //         ['Version', '"test-1"'],
+    //         ['Version', '"1"'],
     //       ],
     //       expected_response_headers: [
-    //         ['Version', '"test-1"'],
+    //         ['Version', '"1"'],
     //       ]
     //     },
     //     {
     //       request_method: 'GET',
     //       request_headers: [
-    //         ['Version', '"test-1"']
+    //         ['Version', '"1"']
     //       ],
     //       expected_type: 'cached',
     //     }
@@ -230,16 +230,16 @@ export default [{
     //       response_headers: [
     //         ['Cache-Control', 'max-age=100000'],
     //         ['Date', 0],
-    //         ['Version', '"test-1"'],
+    //         ['Version', '"1"'],
     //       ],
     //       expected_response_headers: [
-    //         ['Version', '"test-1"'],
+    //         ['Version', '"1"'],
     //       ]
     //     },
     //     {
     //       request_method: 'GET',
     //       request_headers: [
-    //         ['Version', '"test-2"']
+    //         ['Version', '"2"']
     //       ],
     //       expected_type: 'not_cached',
     //     }
@@ -253,21 +253,21 @@ export default [{
     //     {
     //       request_method: 'PUT',
     //       request_headers: [
-    //         ['Version', '"test-1"']
+    //         ['Version', '"1"']
     //       ],
     //       response_headers: [
     //         ['Cache-Control', 'max-age=100000'],
     //         ['Date', 0],
-    //         ['Version', '"test-1"'],
+    //         ['Version', '"1"'],
     //       ],
     //       expected_response_headers: [
-    //         ['Version', '"test-1"'],
+    //         ['Version', '"1"'],
     //       ]
     //     },
     //     {
     //       request_method: 'PUT',
     //       request_headers: [
-    //         ['Version', '"test-1"']
+    //         ['Version', '"1"']
     //       ],
     //       expected_type: 'cached',
     //     }
@@ -281,21 +281,21 @@ export default [{
     //     {
     //       request_method: 'PUT',
     //       request_headers: [
-    //         ['Version', '"test-1"']
+    //         ['Version', '"1"']
     //       ],
     //       response_headers: [
     //         ['Cache-Control', 'max-age=100000'],
     //         ['Date', 0],
-    //         ['Version', '"test-1"'],
+    //         ['Version', '"1"'],
     //       ],
     //       expected_response_headers: [
-    //         ['Version', '"test-1"'],
+    //         ['Version', '"1"'],
     //       ]
     //     },
     //     {
     //       request_method: 'GET',
     //       request_headers: [
-    //         ['Version', '"test-1"']
+    //         ['Version', '"1"']
     //       ],
     //       expected_type: 'cached',
     //     }
@@ -315,11 +315,11 @@ export default [{
         {
           request_method: 'GET',
           response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
             ['Vary', 'Version,Parents'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         }
       ]
@@ -332,11 +332,11 @@ export default [{
         {
           request_method: 'GET',
           response_headers: [
-            ['Parents', '"test-2"'],
+            ['Parents', '"2"'],
             ['Vary', 'Version,Parents'],
           ],
           expected_response_headers: [
-            ['Parents', '"test-2"'],
+            ['Parents', '"2"'],
           ]
         }
       ]
@@ -351,18 +351,18 @@ export default [{
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
             ['Vary', 'Version,Parents'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         },
         {
           request_method: 'GET',
           expected_type: 'cached',
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         }
       ]
@@ -377,18 +377,18 @@ export default [{
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Parents', '"test-2"'],
+            ['Parents', '"2"'],
             ['Vary', 'Version,Parents'],
           ],
           expected_response_headers: [
-            ['Parents', '"test-2"'],
+            ['Parents', '"2"'],
           ]
         },
         {
           request_method: 'GET',
           expected_type: 'cached',
           expected_response_headers: [
-            ['Parents', '"test-2"'],
+            ['Parents', '"2"'],
           ]
         }
       ]
@@ -401,26 +401,26 @@ export default [{
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"test-1"']
+            ['Version', '"1"']
           ],
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
             ['Vary', 'Version,Parents'],
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         },
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"test-1"']
+            ['Version', '"1"']
           ],
           expected_type: 'cached',
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         }
       ]
@@ -433,22 +433,22 @@ export default [{
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"test-1"']
+            ['Version', '"1"']
           ],
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
             ['Vary', 'Version,Parents'],
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         },
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"test-2"']
+            ['Version', '"2"']
           ],
           expected_type: 'not_cached',
         }
@@ -462,16 +462,16 @@ export default [{
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"test-1"']
+            ['Version', '"1"']
           ],
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
             ['Vary', 'Version,Parents'],
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         },
         {
@@ -491,17 +491,17 @@ export default [{
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
             ['Vary', 'Version,Parents'],
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         },
         {
           request_method: 'GET',
           expected_type: 'cached',
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         }
       ]
@@ -517,16 +517,16 @@ export default [{
     //         ['Cache-Control', 'max-age=100000'],
     //         ['Date', 0],
     //         ['Vary', 'Version, Parents'],
-    //         ['Version', '"test-1"'],
+    //         ['Version', '"1"'],
     //       ],
     //       expected_response_headers: [
-    //         ['Version', '"test-1"'],
+    //         ['Version', '"1"'],
     //       ]
     //     },
     //     {
     //       request_method: 'GET',
     //       request_headers: [
-    //         ['Version', '"test-2"']
+    //         ['Version', '"2"']
     //       ],
     //       expected_type: 'not_cached',
     //     }
@@ -547,40 +547,40 @@ export default [{
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-1"']
+//             ['Version', '"1"']
 //           ],
 //           response_headers: [
 //             ['Cache-Control', 'max-age=100000'],
 //             ['Date', 0],
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ],
 //           expected_response_headers: [
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ]
 //         },
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-2"']
+//             ['Version', '"2"']
 //           ],
 //           response_headers: [
 //             ['Cache-Control', 'max-age=100000'],
 //             ['Date', 0],
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ],
 //           expected_type: 'not_cached',
 //           expected_response_headers: [
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ],
 //         },
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-1"']
+//             ['Version', '"1"']
 //           ],
 //           expected_type: 'cached',
 //           expected_response_headers: [
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ],
 //         }
 //       ]
@@ -593,40 +593,40 @@ export default [{
 //         {
 //           request_method: 'PUT',
 //           request_headers: [
-//             ['Version', '"test-1"']
+//             ['Version', '"1"']
 //           ],
 //           response_headers: [
 //             ['Cache-Control', 'max-age=100000'],
 //             ['Date', 0],
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ],
 //           expected_response_headers: [
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ]
 //         },
 //         {
 //           request_method: 'PUT',
 //           request_headers: [
-//             ['Version', '"test-2"']
+//             ['Version', '"2"']
 //           ],
 //           response_headers: [
 //             ['Cache-Control', 'max-age=100000'],
 //             ['Date', 0],
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ],
 //           expected_type: 'not_cached',
 //           expected_response_headers: [
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ],
 //         },
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-1"']
+//             ['Version', '"1"']
 //           ],
 //           expected_type: 'cached',
 //           expected_response_headers: [
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ],
 //         }
 //       ]
@@ -639,42 +639,42 @@ export default [{
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-1"']
+//             ['Version', '"1"']
 //           ],
 //           response_headers: [
 //             ['Cache-Control', 'max-age=100000'],
 //             ['Date', 0],
 //             ['Vary', 'Version'],
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ],
 //           expected_response_headers: [
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ]
 //         },
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-2"']
+//             ['Version', '"2"']
 //           ],
 //           response_headers: [
 //             ['Cache-Control', 'max-age=100000'],
 //             ['Date', 0],
 //             ['Vary', 'Version'],
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ],
 //           expected_type: 'not_cached',
 //           expected_response_headers: [
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ],
 //         },
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-1"']
+//             ['Version', '"1"']
 //           ],
 //           expected_type: 'cached',
 //           expected_response_headers: [
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ],
 //         }
 //       ]
@@ -687,42 +687,42 @@ export default [{
 //         {
 //           request_method: 'PUT',
 //           request_headers: [
-//             ['Version', '"test-1"']
+//             ['Version', '"1"']
 //           ],
 //           response_headers: [
 //             ['Cache-Control', 'max-age=100000'],
 //             ['Date', 0],
 //             ['Vary', 'Version'],
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ],
 //           expected_response_headers: [
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ]
 //         },
 //         {
 //           request_method: 'PUT',
 //           request_headers: [
-//             ['Version', '"test-2"']
+//             ['Version', '"2"']
 //           ],
 //           response_headers: [
 //             ['Cache-Control', 'max-age=100000'],
 //             ['Date', 0],
 //             ['Vary', 'Version'],
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ],
 //           expected_type: 'not_cached',
 //           expected_response_headers: [
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ],
 //         },
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-1"']
+//             ['Version', '"1"']
 //           ],
 //           expected_type: 'cached',
 //           expected_response_headers: [
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ],
 //         }
 //       ]
@@ -741,16 +741,16 @@ export default [{
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-0"']
+//             ['Version', '"0"']
 //           ],
 //           expected_response_headers: [
-//             ['Version', '"test-0"'],
+//             ['Version', '"0"'],
 //           ]
 //         },
 //         {
 //           request_method: 'GET',
 //           expected_response_headers: [
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ],
 //           expected_type: 'cached',
 //         },
@@ -764,19 +764,19 @@ export default [{
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-0"']
+//             ['Version', '"0"']
 //           ],
 //           expected_response_headers: [
-//             ['Version', '"test-0"'],
+//             ['Version', '"0"'],
 //           ]
 //         },
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-1"']
+//             ['Version', '"1"']
 //           ],
 //           expected_response_headers: [
-//             ['Version', '"test-1"'],
+//             ['Version', '"1"'],
 //           ],
 //           expected_type: 'cached',
 //         },
@@ -790,10 +790,10 @@ export default [{
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-0"']
+//             ['Version', '"0"']
 //           ],
 //           expected_response_headers: [
-//             ['Version', '"test-0"'],
+//             ['Version', '"0"'],
 //           ]
 //         },
 //         {
@@ -816,19 +816,19 @@ export default [{
 //         {
 //           request_method: 'PUT',
 //           request_headers: [
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ],
 //           expected_response_headers: [
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ]
 //         },
 //         {
 //           request_method: 'GET',
 //           request_headers: [
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ],
 //           expected_response_headers: [
-//             ['Version', '"test-2"'],
+//             ['Version', '"2"'],
 //           ],
 //           expected_type: 'cached',
 //         },
@@ -853,16 +853,16 @@ export default [{
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
             ['Vary', 'Version, Parents'],
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"test-1"'],
+            ['Version', '"1"'],
           ]
         },
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"test-1"']
+            ['Version', '"1"']
           ],
           expected_type: 'cached',
         }
