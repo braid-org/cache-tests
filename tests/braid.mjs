@@ -1,4 +1,5 @@
-export default [{
+export default [
+{
   id: 'braid-tests',
   name: 'Legacy (Versioning-Unaware) Caches',
   description: 'Legacy caches can confuse/clobber versions',
@@ -402,7 +403,8 @@ export default [{
     //   ]
     // }
   ]
-}, {
+},
+{
   id: 'braid-tests-legacy-with-vary',
   name: 'Caches when presented with `Vary: Version, Parents`',
   description: 'If server responds with `Vary: Version, Parents`, legacy caches are able to distinguish versions correctly',
@@ -736,7 +738,7 @@ export default [{
     //   ]
     // }
   ]
-}, 
+},
 // {
 //   id: 'braid-tests-upgrade-1',
 //   name: 'Upgrade 1',
@@ -1228,4 +1230,77 @@ export default [{
       ]
     },
   ]
-}]
+},
+{
+  id: 'braid-tests-subscribe',
+  name: 'Subscribe/Multiresponse Tests',
+  description: 'These tests involve braid subscription requests, which respond with `209 Multiresponse`.',
+  tests: [
+    {
+      name: 'Does HTTP cache avoid reusing a subscription multiresponse for non-subscribed GET?',
+      id: 'braid-avoid-cache-subscribed-multiresponse',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Subscribe', 'true']
+          ],
+          response_status: [209, 'Multiresponse'],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+          ],
+        },
+        {
+          request_method: 'GET',
+          expected_type: 'not_cached',
+        }
+      ]
+    },
+    {
+      name: 'Does HTTP cache avoid reusing a subscription multiresponse for non-subscribed GET, when no `Cache-Control`?',
+      id: 'braid-avoid-cache-subscribed-multiresponse-no-cache',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Subscribe', 'true']
+          ],
+          response_status: [209, 'Multiresponse'],
+          response_headers: [
+          ],
+        },
+        {
+          request_method: 'GET',
+          expected_type: 'not_cached',
+        }
+      ]
+    },
+    {
+      name: 'Does HTTP cache avoid reusing a subscription multiresponse for non-subscribed GET, when adding `Subscribe` to `Vary`?',
+      id: 'braid-avoid-cache-subscribed-multiresponse-with-vary',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Subscribe', 'true']
+          ],
+          response_status: [209, 'Multiresponse'],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary','Version,Parents,Subscribe']
+          ],
+        },
+        {
+          request_method: 'GET',
+          expected_type: 'not_cached',
+        }
+      ]
+    },
+  ]
+}
+]
