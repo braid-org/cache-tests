@@ -868,5 +868,105 @@ export default [{
         }
       ]
     },
+    {
+      name: 'Does HTTP cache store two versions simultaneously, in parallel?',
+      id: 'braid-reuse-multiple-versions',
+      kind: 'optimal',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version,Parents'],
+            ['Version', '"test-1"']
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-2"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version,Parents'],
+            ['Version', '"test-2"']
+          ],
+          expected_response_headers: [
+            ['Version', '"test-2"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-1"']
+          ],
+          expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-2"']
+          ],
+          expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-2"'],
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Does HTTP cache know which version is current while storing multiple versions?',
+      id: 'braid-know-current-among-multiple',
+      kind: 'optimal',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version,Parents'],
+            ['Version', '"test-1"']
+          ],
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-2"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version,Parents'],
+            ['Version', '"test-2"']
+          ],
+          expected_response_headers: [
+            ['Version', '"test-2"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-1"'],
+          ]
+        },
+      ]
+    },    
   ]
 }]
