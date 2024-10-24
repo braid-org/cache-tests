@@ -9,7 +9,13 @@
     "Response 2 comes from cache"
   ],
   "braid-avoid-no-version-with-vary": true,
+  "braid-cache-version-multiple-times-for-different-parents": true,
   "braid-know-current-among-multiple": true,
+  "braid-not-reuse-version-and-diff-parents": [
+    "Assertion",
+    "Response 2 comes from cache"
+  ],
+  "braid-not-reuse-version-and-diff-parents-with-vary": true,
   "braid-parents-header-passthrough": true,
   "braid-parents-header-passthrough-with-vary": true,
   "braid-reuse-matching-version-with-vary": [
@@ -19,8 +25,12 @@
   "braid-reuse-multiple-versions": true,
   "braid-reuse-no-version": true,
   "braid-reuse-no-version-with-vary": true,
+  "braid-reuse-same-parents": true,
+  "braid-reuse-same-parents-with-vary": true,
   "braid-reuse-same-version": true,
   "braid-reuse-same-version-with-vary": true,
+  "braid-reuse-version-and-parents": true,
+  "braid-reuse-version-and-parents-with-vary": true,
   "braid-store-parents": true,
   "braid-store-parents-with-vary": true,
   "braid-store-version": true,
