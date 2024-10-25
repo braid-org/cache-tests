@@ -87,7 +87,7 @@ export default [
       ]
     },
     {
-      name: 'Does response with a `Version` get cached?',
+      name: 'Does response with a `Version` get cached and reused?',
       id: 'braid-reuse-same-version',
       depends_on: [],
       requests: [
@@ -118,85 +118,7 @@ export default [
       ]
     },
     {
-      name: 'Does HTTP cache avoid reusing a response with the wrong `Version`?',
-      id: 'braid-avoid-different-version',
-      depends_on: [],
-      requests: [
-        {
-          request_method: 'GET',
-          request_headers: [
-            ['Version', '"1"']
-          ],
-          response_headers: [
-            ['Cache-Control', 'max-age=100000'],
-            ['Date', 0],
-            ['Version', '"1"'],
-          ],
-          expected_response_headers: [
-            ['Version', '"1"'],
-          ]
-        },
-        {
-          request_method: 'GET',
-          request_headers: [
-            ['Version', '"2"']
-          ],
-          expected_type: 'not_cached',
-        }
-      ]
-    },
-    {
-      name: 'Does HTTP cache avoid reusing response for old `Version` when requesting current `Version`?',
-      id: 'braid-avoid-no-version',
-      depends_on: [],
-      requests: [
-        {
-          request_method: 'GET',
-          request_headers: [
-            ['Version', '"1"']
-          ],
-          response_headers: [
-            ['Cache-Control', 'max-age=100000'],
-            ['Date', 0],
-            ['Version', '"1"'],
-          ],
-          expected_response_headers: [
-            ['Version', '"1"'],
-          ]
-        },
-        {
-          request_method: 'GET',
-          expected_type: 'not_cached',
-        }
-      ]
-    },
-    {
-      name: 'Does HTTP cache reuse a versioned response to unversioned requests?',
-      id: 'braid-reuse-no-version',
-      depends_on: [],
-      requests: [
-        {
-          request_method: 'GET',
-          response_headers: [
-            ['Cache-Control', 'max-age=100000'],
-            ['Date', 0],
-            ['Version', '"1"'],
-          ],
-          expected_response_headers: [
-            ['Version', '"1"'],
-          ]
-        },
-        {
-          request_method: 'GET',
-          expected_type: 'cached',
-          expected_response_headers: [
-            ['Version', '"1"'],
-          ]
-        }
-      ]
-    },
-    {
-      name: 'Does HTTP cache reuse a response with `Parents`?',
+      name: 'Does response with a `Parents` get cached and reused?',
       id: 'braid-reuse-same-parents',
       depends_on: [],
       requests: [
@@ -227,43 +149,63 @@ export default [
       ]
     },
     {
-      name: 'Does HTTP cache reuse a response with both `Version` and `Parents`?',
-      id: 'braid-reuse-version-and-parents',
+      name: 'Does cache avoid reusing a response with the wrong `Version`?',
+      id: 'braid-avoid-different-version',
       depends_on: [],
       requests: [
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"2"'],
-            ['Parents', '"1"'],
+            ['Version', '"1"']
           ],
           response_headers: [
             ['Cache-Control', 'max-age=100000'],
             ['Date', 0],
-            ['Version', '"2"'],
+            ['Version', '"1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"2"']
+          ],
+          expected_type: 'not_cached',
+        }
+      ]
+    },
+    {
+      name: 'Does cache avoid reusing a response with the wrong `Parents`?',
+      id: 'braid-avoid-different-parents',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Parents', '"1"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
             ['Parents', '"1"'],
           ],
           expected_response_headers: [
-            ['Version', '"2"'],
             ['Parents', '"1"'],
           ]
         },
         {
           request_method: 'GET',
           request_headers: [
-            ['Version', '"2"'],
-            ['Parents', '"1"'],
+            ['Parents', '"2"']
           ],
-          expected_type: 'cached',
-          expected_response_headers: [
-            ['Version', '"2"'],
-            ['Parents', '"1"'],
-          ]
+          expected_type: 'not_cached',
         }
       ]
     },
     {
-      name: 'Does HTTP cache avoid reusing a response with the same `Version` but different `Parents`?',
+      name: 'Does HTTP cache avoid reusing a response with the right `Version` but wrong `Parents`?',
       id: 'braid-not-reuse-version-and-diff-parents',
       depends_on: [],
       requests: [
@@ -294,6 +236,60 @@ export default [
         }
       ]
     },
+    {
+      name: 'Does cache avoid reusing an unversioned response to a versioned request?',
+      id: 'braid-avoid-no-version',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+          ],
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"1"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Version', '"1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"1"'],
+          ],
+          expected_type: 'not_cached',
+        }
+      ]
+    },
+    // {
+    //   name: 'Does HTTP cache reuse a versioned response to unversioned requests?',
+    //   id: 'braid-reuse-no-version',
+    //   depends_on: [],
+    //   requests: [
+    //     {
+    //       request_method: 'GET',
+    //       response_headers: [
+    //         ['Cache-Control', 'max-age=100000'],
+    //         ['Date', 0],
+    //         ['Version', '"1"'],
+    //       ],
+    //       expected_response_headers: [
+    //         ['Version', '"1"'],
+    //       ]
+    //     },
+    //     {
+    //       request_method: 'GET',
+    //       expected_type: 'cached',
+    //       expected_response_headers: [
+    //         ['Version', '"1"'],
+    //       ]
+    //     }
+    //   ]
+    // },
 
     // {
     //   name: 'Does HTTP cache reuse a response with a `Version`, from a request without a `Version`, when requesting the same `Version`?',
@@ -635,6 +631,42 @@ export default [
           ],
           expected_type: 'cached',
           expected_response_headers: [
+            ['Parents', '"1"'],
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Does HTTP cache reuse a response with both `Version` and `Parents`?',
+      id: 'braid-reuse-version-and-parents',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"2"'],
+            ['Parents', '"1"'],
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Version', '"2"'],
+            ['Parents', '"1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"2"'],
+            ['Parents', '"1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"2"'],
+            ['Parents', '"1"'],
+          ],
+          expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"2"'],
             ['Parents', '"1"'],
           ]
         }
