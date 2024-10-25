@@ -1,4 +1,5 @@
 {
+  "braid-avoid-309": true,
   "braid-avoid-cache-subscribed-multiresponse": true,
   "braid-avoid-cache-subscribed-multiresponse-no-cache": true,
   "braid-avoid-cache-subscribed-multiresponse-with-vary": true,

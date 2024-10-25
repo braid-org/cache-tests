@@ -265,6 +265,27 @@ export default [
         }
       ]
     },
+    {
+      name: 'Does cache avoid reusing a `309: Version Unknown Here` response?',
+      id: 'braid-avoid-309',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"1"']
+          ],
+          response_status: [309, 'Version Unknown Here'],
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"1"']
+          ],
+          expected_type: 'not_cached',
+        }
+      ]
+    },
     // {
     //   name: 'Does HTTP cache reuse a versioned response to unversioned requests?',
     //   id: 'braid-reuse-no-version',
