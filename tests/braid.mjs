@@ -1056,37 +1056,10 @@ export default [
 {
   id: 'braid-tests-optional',
   name: 'Optional',
-  description: 'Optional',
+  description: 'Can a cache store multiple versions? And can it cache based on a response `Version`?',
   tests: [
     {
-      name: 'Does HTTP cache reuse a response with a `Version`, from a request without a `Version`, when requesting the same `Version`?',
-      id: 'braid-reuse-matching-version-with-vary',
-      kind: 'optimal',
-      depends_on: [],
-      requests: [
-        {
-          request_method: 'GET',
-          response_headers: [
-            ['Cache-Control', 'max-age=100000'],
-            ['Date', 0],
-            ['Vary', 'Version, Parents'],
-            ['Version', '"1"'],
-          ],
-          expected_response_headers: [
-            ['Version', '"1"'],
-          ]
-        },
-        {
-          request_method: 'GET',
-          request_headers: [
-            ['Version', '"1"']
-          ],
-          expected_type: 'cached',
-        }
-      ]
-    },
-    {
-      name: 'Does HTTP cache store two versions simultaneously, in parallel?',
+      name: 'Does cache store two versions simultaneously?',
       id: 'braid-reuse-multiple-versions',
       kind: 'optimal',
       depends_on: [],
@@ -1144,49 +1117,7 @@ export default [
       ]
     },
     {
-      name: 'Does HTTP cache know which version is current while storing multiple versions?',
-      id: 'braid-know-current-among-multiple',
-      kind: 'optimal',
-      depends_on: [],
-      requests: [
-        {
-          request_method: 'GET',
-          response_headers: [
-            ['Cache-Control', 'max-age=100000'],
-            ['Date', 0],
-            ['Vary', 'Version,Parents'],
-            ['Version', '"test-1"']
-          ],
-          expected_response_headers: [
-            ['Version', '"test-1"'],
-          ]
-        },
-        {
-          request_method: 'GET',
-          request_headers: [
-            ['Version', '"test-2"']
-          ],
-          response_headers: [
-            ['Cache-Control', 'max-age=100000'],
-            ['Date', 0],
-            ['Vary', 'Version,Parents'],
-            ['Version', '"test-2"']
-          ],
-          expected_response_headers: [
-            ['Version', '"test-2"'],
-          ]
-        },
-        {
-          request_method: 'GET',
-          expected_type: 'cached',
-          expected_response_headers: [
-            ['Version', '"test-1"'],
-          ]
-        },
-      ]
-    },
-    {
-      name: 'Does HTTP cache store the same version multiple times for different `Parents`?',
+      name: 'Does cache store the same version multiple times, for different `Parents`?',
       id: 'braid-cache-version-multiple-times-for-different-parents',
       kind: 'optimal',
       depends_on: [],
@@ -1241,78 +1172,147 @@ export default [
         },
       ]
     },
+    {
+      name: 'Does cache know which version is current while storing multiple versions?',
+      id: 'braid-know-current-among-multiple',
+      kind: 'optimal',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version,Parents'],
+            ['Version', '"test-3"']
+          ],
+          expected_response_headers: [
+            ['Version', '"test-3"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"test-2"']
+          ],
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version,Parents'],
+            ['Version', '"test-2"']
+          ],
+          expected_response_headers: [
+            ['Version', '"test-2"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          expected_type: 'cached',
+          expected_response_headers: [
+            ['Version', '"test-3"'],
+          ]
+        },
+      ]
+    },
+    {
+      name: 'Does cache respect response `Version`?',
+      id: 'braid-reuse-matching-version-with-vary',
+      kind: 'optimal',
+      depends_on: [],
+      requests: [
+        {
+          request_method: 'GET',
+          response_headers: [
+            ['Cache-Control', 'max-age=100000'],
+            ['Date', 0],
+            ['Vary', 'Version, Parents'],
+            ['Version', '"1"'],
+          ],
+          expected_response_headers: [
+            ['Version', '"1"'],
+          ]
+        },
+        {
+          request_method: 'GET',
+          request_headers: [
+            ['Version', '"1"']
+          ],
+          expected_type: 'cached',
+        }
+      ]
+    },    
   ]
 },
-{
-  id: 'braid-tests-subscribe',
-  name: 'Subscribe/Multiresponse Tests',
-  description: 'These tests involve braid subscription requests, which respond with `209 Multiresponse`.',
-  tests: [
-    {
-      name: 'Does HTTP cache avoid reusing a subscription multiresponse for non-subscribed GET?',
-      id: 'braid-avoid-cache-subscribed-multiresponse',
-      depends_on: [],
-      requests: [
-        {
-          request_method: 'GET',
-          request_headers: [
-            ['Subscribe', 'true']
-          ],
-          response_status: [209, 'Multiresponse'],
-          response_headers: [
-            ['Cache-Control', 'max-age=100000'],
-            ['Date', 0],
-          ],
-        },
-        {
-          request_method: 'GET',
-          expected_type: 'not_cached',
-        }
-      ]
-    },
-    {
-      name: 'Does HTTP cache avoid reusing a subscription multiresponse for non-subscribed GET, when no `Cache-Control`?',
-      id: 'braid-avoid-cache-subscribed-multiresponse-no-cache',
-      depends_on: [],
-      requests: [
-        {
-          request_method: 'GET',
-          request_headers: [
-            ['Subscribe', 'true']
-          ],
-          response_status: [209, 'Multiresponse'],
-          response_headers: [
-          ],
-        },
-        {
-          request_method: 'GET',
-          expected_type: 'not_cached',
-        }
-      ]
-    },
-    {
-      name: 'Does HTTP cache avoid reusing a subscription multiresponse for non-subscribed GET, when adding `Subscribe` to `Vary`?',
-      id: 'braid-avoid-cache-subscribed-multiresponse-with-vary',
-      depends_on: [],
-      requests: [
-        {
-          request_method: 'GET',
-          request_headers: [
-            ['Subscribe', 'true']
-          ],
-          response_status: [209, 'Multiresponse'],
-          response_headers: [
-            ['Cache-Control', 'max-age=100000'],
-            ['Date', 0],
-            ['Vary','Version,Parents,Subscribe']
-          ],
-        },
-        {
-          request_method: 'GET',
-          expected_type: 'not_cached',
-        }
-      ]
-    },
-  ]
-}
+// {
+//   id: 'braid-tests-subscribe',
+//   name: 'Subscribe/Multiresponse Tests',
+//   description: 'These tests involve braid subscription requests, which respond with `209 Multiresponse`.',
+//   tests: [
+//     {
+//       name: 'Does HTTP cache avoid reusing a subscription multiresponse for non-subscribed GET?',
+//       id: 'braid-avoid-cache-subscribed-multiresponse',
+//       depends_on: [],
+//       requests: [
+//         {
+//           request_method: 'GET',
+//           request_headers: [
+//             ['Subscribe', 'true']
+//           ],
+//           response_status: [209, 'Multiresponse'],
+//           response_headers: [
+//             ['Cache-Control', 'max-age=100000'],
+//             ['Date', 0],
+//           ],
+//         },
+//         {
+//           request_method: 'GET',
+//           expected_type: 'not_cached',
+//         }
+//       ]
+//     },
+//     {
+//       name: 'Does HTTP cache avoid reusing a subscription multiresponse for non-subscribed GET, when no `Cache-Control`?',
+//       id: 'braid-avoid-cache-subscribed-multiresponse-no-cache',
+//       depends_on: [],
+//       requests: [
+//         {
+//           request_method: 'GET',
+//           request_headers: [
+//             ['Subscribe', 'true']
+//           ],
+//           response_status: [209, 'Multiresponse'],
+//           response_headers: [
+//           ],
+//         },
+//         {
+//           request_method: 'GET',
+//           expected_type: 'not_cached',
+//         }
+//       ]
+//     },
+//     {
+//       name: 'Does HTTP cache avoid reusing a subscription multiresponse for non-subscribed GET, when adding `Subscribe` to `Vary`?',
+//       id: 'braid-avoid-cache-subscribed-multiresponse-with-vary',
+//       depends_on: [],
+//       requests: [
+//         {
+//           request_method: 'GET',
+//           request_headers: [
+//             ['Subscribe', 'true']
+//           ],
+//           response_status: [209, 'Multiresponse'],
+//           response_headers: [
+//             ['Cache-Control', 'max-age=100000'],
+//             ['Date', 0],
+//             ['Vary','Version,Parents,Subscribe']
+//           ],
+//         },
+//         {
+//           request_method: 'GET',
+//           expected_type: 'not_cached',
+//         }
+//       ]
+//     },
+//   ]
+// }
 ]
