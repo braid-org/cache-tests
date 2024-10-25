@@ -5,7 +5,7 @@ export default [
   description: 'Legacy caches can confuse/clobber versions',
   tests: [
     {
-      name: 'Does HTTP cache allow `Version` header to pass through?',
+      name: 'Does `Version` header pass through cache unscathed?',
       id: 'braid-version-header-passthrough',
       depends_on: [],
       requests: [
@@ -21,7 +21,7 @@ export default [
       ]
     },
     {
-      name: 'Does HTTP cache allow `Parents` header to pass through?',
+      name: 'Does `Parents` header pass through cache unscathed?',
       id: 'braid-parents-header-passthrough',
       depends_on: [],
       requests: [
@@ -37,7 +37,7 @@ export default [
       ]
     },
     {
-      name: 'Does HTTP cache store `Version` header?',
+      name: 'Does `Version` header get cached with response?',
       id: 'braid-store-version',
       depends_on: [],
       requests: [
@@ -62,7 +62,7 @@ export default [
       ]
     },
     {
-      name: 'Does HTTP cache store `Parents` header?',
+      name: 'Does `Parents` header get cached with response?',
       id: 'braid-store-parents',
       depends_on: [],
       requests: [
@@ -87,7 +87,7 @@ export default [
       ]
     },
     {
-      name: 'Does HTTP cache reuse a response with a `Version`?',
+      name: 'Does response with a `Version` get cached?',
       id: 'braid-reuse-same-version',
       depends_on: [],
       requests: [
