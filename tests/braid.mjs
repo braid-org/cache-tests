@@ -205,7 +205,7 @@ export default [
       ]
     },
     {
-      name: 'Does HTTP cache avoid reusing a response with the right `Version` but wrong `Parents`?',
+      name: 'Does cache avoid reusing a response with the right `Version` but wrong `Parents`?',
       id: 'braid-not-reuse-version-and-diff-parents',
       depends_on: [],
       requests: [
