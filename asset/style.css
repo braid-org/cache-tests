@@ -105,6 +105,10 @@ input.select {
 
 code {
   white-space: nowrap;
+  font-size: 12px;
+  background-color: #eee;
+  padding: 2px;
+  border-radius: 2px;
 }
 
 pre code {
