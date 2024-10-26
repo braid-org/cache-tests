@@ -1,9 +1,11 @@
 {
   "braid-avoid-309": true,
   "braid-avoid-309-with-vary": true,
-  "braid-avoid-cache-subscribed-multiresponse": true,
-  "braid-avoid-cache-subscribed-multiresponse-no-cache": true,
-  "braid-avoid-cache-subscribed-multiresponse-with-vary": true,
+  "braid-avoid-bad-version-to-unversioned": [
+    "Assertion",
+    "Response 4 header Version is \"\"2\"\", not \"\"3\"\""
+  ],
+  "braid-avoid-bad-version-to-unversioned-with-vary": true,
   "braid-avoid-different-parents": [
     "Assertion",
     "Response 2 comes from cache"
@@ -20,7 +22,15 @@
   ],
   "braid-avoid-no-version-with-vary": true,
   "braid-cache-version-multiple-times-for-different-parents": true,
-  "braid-know-current-among-multiple": true,
+  "braid-know-current-among-multiple": [
+    "Assertion",
+    "Response 4 does not come from cache"
+  ],
+  "braid-not-reuse-parents-and-diff-version": [
+    "Assertion",
+    "Response 2 comes from cache"
+  ],
+  "braid-not-reuse-parents-and-diff-version-with-vary": true,
   "braid-not-reuse-version-and-diff-parents": [
     "Assertion",
     "Response 2 comes from cache"
@@ -37,6 +47,10 @@
   "braid-reuse-same-parents-with-vary": true,
   "braid-reuse-same-version": true,
   "braid-reuse-same-version-with-vary": true,
+  "braid-reuse-unordered-version-with-vary": [
+    "Assertion",
+    "Response 2 does not come from cache"
+  ],
   "braid-store-parents": true,
   "braid-store-parents-with-vary": true,
   "braid-store-version": true,
