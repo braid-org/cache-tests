@@ -43,10 +43,7 @@
     "Response 2 does not come from cache"
   ],
   "braid-reuse-multiple-versions": true,
-  "braid-reuse-same-parents": [
-    "Setup",
-    "Response 1 status is 409, not 200"
-  ],
+  "braid-reuse-same-parents": true,
   "braid-reuse-same-parents-with-vary": true,
   "braid-reuse-same-version": true,
   "braid-reuse-same-version-with-vary": true,
